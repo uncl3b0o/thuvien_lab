@@ -1,0 +1,164 @@
+<!-- Sidebar -->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+          <div>
+            <p class="app-sidebar__user-name"><b>Username</b></p>
+          </div>
+      </div>
+      <hr>
+      <ul class="app-menu">
+      <li><a class="app-menu__item haha" href="/">
+          <span class="app-menu__label">Trang chủ</span></a></li>
+
+      <li><a class="app-menu__item " href="/reader">
+          <span class="app-menu__label">Quản lý độc giả</span></a></li>
+
+      <li><a class="app-menu__item" href="/book">
+        <span class="app-menu__label">Quản lý sách</span></a></li>
+
+      <li><a class="app-menu__item active" href="/callcard">
+        <span class="app-menu__label">Quản lý phiếu mượn trả</span></a>
+      </li>
+
+      <li><a class="app-menu__item" href="/statistic">
+        <span class="app-menu__label">Báo cáo thống kê</span></a></li>
+
+      <li><a class="app-menu__item" href="">
+        <span class="app-menu__label" id="btn-logout">Đăng xuất </span></a></li>
+    </ul>
+    </aside>
+    Danh sách độc giả
+    <main class="app-content">
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb side">
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách phiếu mượn</b></a></li>
+            </ul>
+            <div id="clock"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-body">
+                        <div class="row element-button">
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="/callcard/createdcallcard" title="Thêm"><i class="fas fa-plus"></i>
+                                Tạo phiếu mượn trả mới</a>
+                            </div>
+
+                            <div class="col-sm-2">
+                              <a class="btn btn-excel btn-sm" href="" title="In">
+                                  <i class="fas fa-file-excel"></i> Xuất Excel</a>
+                            </div>
+                          </div>
+                          <!-- Tìm kiếm -->
+                          <p class="timkiem"><b>TÌM KIẾM PHIẾU MƯỢN:</b></p>
+                            <form method="get" action="/callcard/search">
+                              <input name="q" type="text" id="search-btn" onclick="" placeholder="Nhập thông tin phiếu mượn trả cần tìm ...">
+                              <button class="btn" type="submit">Tìm kiếm</button>
+                            </form>
+                            <hr>                     
+
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã phiếu mượn</th>
+                                    <th>Mã độc giả</th>
+                                    <th>Lớp</th>
+                                    <th>Họ tên</th> 
+                                    <th>Nhan đề</th>
+                                    <th>Giá tiền</th>
+                                    <th>Ngày mượn</th>
+                                    <th>Hạn trả</th>
+                                    <th>Tiền cọc</th>
+                                    {{!-- {{#each Call}}
+                                        <th>{{this.fullname}}</th>
+                                        <th>{{this.class}}</th>
+                                    {{/each}} --}}
+                                </tr>
+                                    {{!-- <th>STT</th> --}}
+                                    {{#each Call}}
+                                        <tr>
+                                          <th scope="row">{{sum @index 1}}</th>
+                                        <th>{{this.callcardid}}</th>
+                                        <th>{{this.readerid}}</th>
+                                        <th>{{this.class}}</th>
+                                        <th>{{this.fullname}}</th>
+                                        <th>{{this.topic}}</th>
+                                        <th>{{this.cost}}</th>
+                                        <th>{{this.createdat}}</th>
+                                        <th>{{this.expirationdate}}</th>
+                                        <th>{{this.deposit}}</th>
+                                        <th>
+                                            <a href="/callcard/{{this.callcardid}}/edit" class="btn btn-link">Sửa</a>
+                                            <a href="" data-id="{{this.callcardid}}" class="btn btn-link" data-toggle="modal" data-target="#delete-callcard-model">Xóa</a>
+                                        </th>
+                                        </tr>
+                                    {{/each}}
+                            </thead>
+                            <tbody>
+                                <tr>
+   
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    {{!-- MODAL --}}
+
+        <div id="delete-callcard-model" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Xóa phiếu mượn trả</h5>
+                <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Bạn có chắc muốn xóa thông tin ?</p>
+              </div>
+              <div class="modal-footer row">
+                <button id="btn-delete-callcard" type="button" class="btn btn-primary col">Xóa</button>
+                <button type="button" class="btn btn-secondary col" data-dismiss="modal">Hủy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form name="delete-callcard-form" method="post"></form>
+    </main>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          var bookID;
+          var deleteForm = document.forms['delete-callcard-form'];
+
+          $('#delete-callcard-model').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) 
+          callcardID = button.data('id'); 
+          });
+          console.log(bookID)
+          var btnDeleteCallcard = document.getElementById('btn-delete-callcard');
+          
+          btnDeleteCallcard.onclick = function () {
+            deleteForm.action = '/callcard/' + callcardID + '?_method=DELETE';
+            deleteForm.submit();
+          }
+
+      });
+    </script>
+
+    <script>
+      var btnLogout = document.getElementById('btn-logout');
+
+      btnLogout.onclick = function () {
+        document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+      }
+    </script>

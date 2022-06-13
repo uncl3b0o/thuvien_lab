@@ -1,0 +1,104 @@
+<!-- Sidebar -->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div>
+          <p class="app-sidebar__user-name"><b>Username</b></p>
+        </div>
+      </div>
+      <hr>
+      <ul class="app-menu">
+      <li><a class="app-menu__item haha" href="/">
+          <span class="app-menu__label" for="">Trang chủ</span></a></li>
+
+      <li><a class="app-menu__item" href="/reader">
+          <span class="app-menu__label" for="">Quản lý độc giả</span></a></li>
+
+      <li><a class="app-menu__item active" href="/book">
+        <span class="app-menu__label" for="">Quản lý sách</span></a></li>
+
+      <li><a class="app-menu__item" href="/callcard">
+        <span class="app-menu__label" for="">Quản lý phiếu mượn trả</span></a>
+      </li>
+
+      <li><a class="app-menu__item" href="/statistic">
+        <span class="app-menu__label" for="">Báo cáo thống kê</span></a></li>
+
+      <li><a class="app-menu__item" href="">
+        <span class="app-menu__label" id="btn-logout">Đăng xuất </span></a></li>
+    </ul>
+    </aside>
+    <main class="app-content">
+        <div class="app-title">
+          <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">Danh sách sách</li>
+            <li class="breadcrumb-item"><a href="#">Chỉnh sửa thông tin sách</a></li>
+          </ul>
+        </div>
+        <a class="btn btn-cancel" href="/book">Quay lại</a>
+        <div class="row">
+          <div class="col-md-12">
+    
+            <div class="tile">
+    
+              <h3 class="tile-title">Chỉnh sửa thông tin sách</h3>
+              <div class="tile-body">
+{{!-- 
+                FORM --}}
+                <form class="row" method="post" action="/book/{{books._id}}?_method=PUT">
+                  <div class="form-group col-md-4">
+                    <label class="control-label" for="idbook">Mã số</label>
+                    <input class="form-control" value="{{books.idbook}}" id="idbook" name="idbook" type="text">
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="control-label" for="topic">Nhan đề</label>
+                    <input class="form-control" value="{{books.topic}}" id="topic" name="topic" type="text" required>
+                  </div>
+                  <div class="form-group  col-md-4">
+                    <label class="control-label" for="author">Tác giả</label>
+                    <input class="form-control" value="{{books.author}}" id="author" name="author" type="text" required>
+                  </div>
+                  <div class="form-group  col-md-4">
+                    <label class="control-label" for="date">Ngày nhập</label>
+                    <input class="form-control" value="{{books.date}}" id="date" name="date" type="date" required>
+                  </div>
+                  <div class="form-group  col-md-3">
+                    <label class="control-label" for="type">Thể loại</label>
+                    <select class="form-control" value="{{books.type}}" id="type" name="type">
+                      <option>-- Chọn thể loại --</option>
+                      <option>Sách</option>
+                      <option>Tài liệu tham khảo</option>
+                      <option>Báo cáo khoa học</option>
+                    </select>
+                  </div>
+                  <div class="form-group  col-md-3">
+                    <label class="control-label" for="description">Miêu tả</label>
+                    <textarea class="form-control" id="description" name="description" required>{{books.description}}</textarea>
+                  </div>
+                  <div class="form-group  col-md-3">
+                    <label class="control-label" for="nxb">NXB</label>
+                    <input class="form-control" value="{{books.nxb}}" id="nxb" name="nxb" type="text" required>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label class="control-label" for="cost">Giá tiền</label>
+                    <input class="form-control" value="{{books.cost}}" id="cost" name="cost" type="number" required>
+                  </div>
+                  <div class="form-group  col-md-3">
+                    <label class="control-label" for="image">Hình ảnh</label>
+                    <input class="form-control" value="{{this.image}}" id="image" name="image" type="text" required>
+                  </div>
+                  </div>
+                  <button type="submit" class="btn btn-save" style="width: 20%;">Lưu lại</button>
+                </form>
+              </div>
+             
+            </div>
+    
+      </main>
+
+      <script>
+      var btnLogout = document.getElementById('btn-logout');
+
+      btnLogout.onclick = function () {
+        document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+      }
+    </script>

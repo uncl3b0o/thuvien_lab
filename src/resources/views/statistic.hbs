@@ -1,0 +1,319 @@
+<body>
+    <!-- Sidebar -->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+          <div>
+            <p class="app-sidebar__user-name"><b>Username</b></p>
+          </div>
+      </div>
+      <ul class="app-menu">
+      <li><a class="app-menu__item haha" href="/">
+          <span class="app-menu__label">Trang chủ</span></a></li>
+
+      <li><a class="app-menu__item" href="/reader">
+          <span class="app-menu__label">Quản lý độc giả</span></a></li>
+
+      <li><a class="app-menu__item" href="/book">
+        <span class="app-menu__label">Quản lý sách</span></a></li>
+
+      <li><a class="app-menu__item" href="/callcard">
+        <span class="app-menu__label">Quản lý phiếu mượn trả</span></a>
+      </li>
+
+      <li><a class="app-menu__item active" href="/statistic">
+        <span class="app-menu__label">Báo cáo thống kê</span></a></li>
+
+      <li><a class="app-menu__item" href="">
+        <span class="app-menu__label" id="btn-logout">Đăng xuất </span></a></li>
+    </ul>
+    </aside>
+
+    <main class="app-content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="app-title">
+              <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><b>Báo cáo thống kê</b></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-3">
+              <div class="widget-small primary coloured-icon"><i class='icon fa-3x bx bxs-chart' ></i>
+                  <div class="info">
+                      <h4>Số lượng bạn đọc</h4>
+                      <p><b>{{resultReader}} bạn mới</b></p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="widget-small info coloured-icon"><i class='icon fa-3x bx bxs-user-badge' ></i>
+                  <div class="info">
+                      <h4>Số lượt mượn</h4>
+                      <p><b>{{resultCallcard}} lượt mượn mới</b></p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="widget-small warning coloured-icon"><i class='icon fa-3x bx bxs-tag-x' ></i>
+                  <div class="info">
+                      <h4>Số lượng nhan đề</h4>
+                      <p><b>{{resultBook}} nhan đề</b></p>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+              <div class="widget-small danger coloured-icon"><i class='icon fa-3x bx bxs-receipt' ></i>
+                  <div class="info">
+                      <h4>Số lượng sách</h4>
+                      <p><b>{{resultBook}} bản</b></p>
+                  </div>
+              </div>
+          </div>
+      </div>
+        <div class="container">
+          <br>
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-bs-toggle="tab" href="#home">Báo cáo mượn trả</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#menu1">Báo cáo mất hỏng</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#menu2">Báo cáo nhập sách</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#menu3">Thống kê bạn đọc</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" href="#menu4">Thống kê lần mượn</a>
+            </li>
+          </ul>
+        
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div id="home" class="container tab-pane active"><br>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="tile">
+                      <div class="col-md-12">
+                        <div class="tile">
+                            <!-- Tìm kiếm -->
+                          <p class="timkiem"><b>TÌM KIẾM:</b></p>
+                              <form action="">
+                                <label for="date">Ngày:</label>
+                                <input type="date" id="date" name="date">
+                                <button type="button" class="btn btn-primary">Tìm kiếm</button>
+                              </form>
+                              <input type="text" id="myInput" onclick="" placeholder="Tìm kiếm ...">
+                          <hr>     
+                        </div>
+                      </div>
+                        <div>
+                            <h3 class="tile-title">Báo cáo mượn trả</h3>
+                        </div>
+                        <div class="tile-body">
+                            <table class="table table-hover table-bordered" id="sampleTable">
+                                <thead>
+                                    <tr>
+                                      <th>STT</th>
+                                      <th>Mã phiếu mượn</th>
+                                      <th>Mã độc giả</th>
+                                      <th>Họ tên</th> 
+                                      <th>Mã tài liệu</th>
+                                      <th>Nhan đề</th>
+                                      <th>Dewey</th>
+                                      <th>Giá tiền</th>
+                                      <th>Ngày mượn</th>
+                                      <th>Hạn trả</th>
+                                      <th>Gia hạn</th>
+                                      <th>Tiền cọc</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div id="menu1" class="container tab-pane fade"><br>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="tile">
+                      <div class="col-md-12">
+                        <div class="tile">
+                            <!-- Tìm kiếm -->
+                          <p class="timkiem"><b>TÌM KIẾM:</b></p>
+                              <form action="">
+                                <label for="date">Ngày:</label>
+                                <input type="date" id="date" name="date">
+                                <button type="button" class="btn btn-primary">Tìm kiếm</button>
+                              </form>
+                              <input type="text" id="myInput" onclick="" placeholder="Tìm kiếm ...">
+                          <hr>     
+                        </div>
+                      </div>
+                        <div>
+                            <h3 class="tile-title">Báo cáo mất hỏng</h3>
+                        </div>
+                        <div class="tile-body">
+                            <table class="table table-hover table-bordered" id="sampleTable">
+                                <thead>
+                                    <tr>
+                                      <th>STT</th>
+                                      <th>Mã tài liệu</th>
+                                      <th>Nhan đề</th>
+                                      <th>Thể loại</th>
+                                      <th>Số lượng mất/ hỏng</th> 
+                                      <th>Lý do</th>
+                                      <th>Tình trạng</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div id="menu2" class="container tab-pane fade"><br>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="tile">
+                      <div class="col-md-12">
+                        <div class="tile">
+                            <!-- Tìm kiếm -->
+                          <p class="timkiem"><b>TÌM KIẾM:</b></p>
+                              <form action="">
+                                <label for="date">Ngày:</label>
+                                <input type="date" id="date" name="date">
+                                <button type="button" class="btn btn-primary">Tìm kiếm</button>
+                              </form>
+                              <input type="text" id="myInput" onclick="" placeholder="Tìm kiếm ...">
+                          <hr>     
+                        </div>
+                      </div>
+                        <div>
+                            <h3 class="tile-title">Báo cáo nhập sách</h3>
+                        </div>
+                        <div class="tile-body">
+                            <table class="table table-hover table-bordered" id="sampleTable">
+                                <thead>
+                                    <tr>
+                                    <th>STT</th>
+                                    <th>Mã số</th>
+                                    <th>Mã tài liệu</th>
+                                    <th>Nhan đề</th>
+                                    <th>Dewey</th>
+                                    <th>Tác giả</th>
+                                    <th>Thể loại</th>
+                                    <th>NXB</th>
+                                    <th>Giá tiền</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div id="menu3" class="container tab-pane fade"><br>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="tile">
+                      <div class="col-md-12">
+                        <div class="tile">
+                            <!-- Tìm kiếm -->
+                          <p class="timkiem"><b>TÌM KIẾM:</b></p>
+                              <form action="">
+                                <label for="date">Ngày:</label>
+                                <input type="date" id="date" name="date">
+                                <button type="button" class="btn btn-primary">Tìm kiếm</button>
+                              </form>
+                              <input type="text" id="myInput" onclick="" placeholder="Tìm kiếm ...">
+                          <hr>     
+                        </div>
+                      </div>
+                        <div>
+                            <h3 class="tile-title">Thống kê bạn đọc</h3>
+                        </div>
+                        <div class="tile-body">
+                            <table class="table table-hover table-bordered" id="sampleTable">
+                                <thead>
+                                    <tr>
+                                    <th>STT</th>
+                                    <th>Số thẻ</th>
+                                    <th>Họ tên</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Điện thoại</th>
+                                    <th>CCCD</th>
+                                    <th>Email</th>
+                                    <th>Lớp</th>
+                                    <th>Ngành học</th>
+                                    <th>Đối tượng</th>
+                                    <th>Thẻ</th>
+                                    <th>Hạn sử dụng thẻ</th>
+                                    <th>Sách mượn</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div id="menu4" class="container tab-pane fade"><br>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="tile">
+                      <div class="col-md-12">
+                        <div class="tile">
+                            <!-- Tìm kiếm -->
+                          <p class="timkiem"><b>TÌM KIẾM:</b></p>
+                              <form action="">
+                                <label for="date">Ngày:</label>
+                                <input type="date" id="date" name="date">
+                                <button type="button" class="btn btn-primary">Tìm kiếm</button>
+                              </form>
+                              <input type="text" id="myInput" onclick="" placeholder="Tìm kiếm ...">
+                          <hr>     
+                        </div>
+                      </div>
+                    <div class="tile">
+                        <div>
+                            <h3 class="tile-title">Thống kê lần mượn</h3>
+                        </div>
+                        <div class="tile-body">
+                            <table class="table table-hover table-bordered" id="sampleTable">
+                                <thead>
+                                    <tr>
+                                      <th>STT</th>
+                                      <th>Mã tài liệu</th>
+                                      <th>Nhan đề</th>
+                                      <th>Dewey</th>
+                                      <th>Số lượt mượn</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+    </main>
+
+
+    <script>
+      var btnLogout = document.getElementById('btn-logout');
+
+      btnLogout.onclick = function () {
+        document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+      }
+    </script>
+</body>

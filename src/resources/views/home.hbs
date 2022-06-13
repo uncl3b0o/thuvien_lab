@@ -1,0 +1,37 @@
+<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+      <div>
+        <p class="app-sidebar__user-name"><b>UserName</b></p>
+      </div>
+    </div>
+    <hr>
+    <ul class="app-menu">
+      <li><a class="app-menu__item haha" href="/">
+          <span class="app-menu__label">Trang chủ</span></a></li>
+
+      <li><a class="app-menu__item " href="/reader">
+          <span class="app-menu__label">Quản lý độc giả</span></a></li>
+
+      <li><a class="app-menu__item" href="/book">
+        <span class="app-menu__label">Quản lý sách</span></a></li>
+
+      <li><a class="app-menu__item" href="/callcard">
+        <span class="app-menu__label">Quản lý phiếu mượn trả</span></a>
+      </li>
+
+      <li><a class="app-menu__item" href="/statistic">
+        <span class="app-menu__label">Báo cáo thống kê</span></a></li>
+
+      <li><a class="app-menu__item" href="">
+        <span class="app-menu__label" id="btn-logout">Đăng xuất </span></a></li>
+    </ul>
+
+
+    <script>
+      var btnLogout = document.getElementById('btn-logout');
+
+      btnLogout.onclick = function () {
+        document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+      }
+    </script>
+    

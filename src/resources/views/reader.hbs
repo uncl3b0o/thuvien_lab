@@ -1,0 +1,169 @@
+<!-- Sidebar -->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+          <div>
+            <p class="app-sidebar__user-name"><b>Username</b></p>
+          </div>
+      </div>
+      <ul class="app-menu">
+      <li><a class="app-menu__item haha" href="/">
+          <span class="app-menu__label">Trang chủ</span></a></li>
+
+      <li><a class="app-menu__item active" href="/reader">
+          <span class="app-menu__label">Quản lý độc giả</span></a></li>
+
+      <li><a class="app-menu__item" href="/book">
+        <span class="app-menu__label">Quản lý sách</span></a></li>
+
+      <li><a class="app-menu__item" href="/callcard">
+        <span class="app-menu__label">Quản lý phiếu mượn trả</span></a>
+      </li>
+
+      <li><a class="app-menu__item" href="/statistic">
+        <span class="app-menu__label">Báo cáo thống kê</span></a></li>
+
+      <li><a class="app-menu__item" href="">
+        <span class="app-menu__label" id="btn-logout">Đăng xuất </span></a></li>
+    </ul>
+    </aside>
+    Danh sách độc giả
+    <main class="app-content">
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb side">
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách độc giả</b></a></li>
+            </ul>
+            <div id="clock"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-body">
+                        <div class="row element-button">
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="/reader/createdreaders" title="Thêm"><i class="fas fa-plus"></i>
+                                Tạo mới độc giả</a>
+                            </div>
+
+              
+                            <div class="col-sm-2">
+                              <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="">
+                                  <i class="fas fa-print"></i> In dữ liệu</a>
+                            </div>
+
+                            <div class="col-sm-2">
+                              <a class="btn btn-excel btn-sm" href="" title="In">
+                                  <i class="fas fa-file-excel"></i> Xuất Excel</a>
+                            </div>
+
+                          </div>
+                          <!-- Tìm kiếm -->
+                          <p class="timkiem"><b>TÌM KIẾM ĐỘC GIẢ:</b></p>
+                            <form method="get" action="/reader/search">
+                              <input name="q" type="text" id="myInput" onclick="" placeholder="Nhập mã độc giả cần tìm...">
+                              <button class="btn" type="submit">Tìm kiếm</button>
+                            </form>
+                            <hr>                     
+
+                                <thead>
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">Số thẻ</th>
+                          <th scope="col">Họ và tên</th>
+                          <th scope="col">Lớp</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Địa chỉ</th>
+                          <th scope="col">SĐT</th>
+                          <th scope="col">Ngày Sinh</th>
+                          <th scope="col">CMND</th>
+                          <th scope="col">Giới tính</th>
+                          <th scope="col">Đối tượng</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each readers}}
+
+                          <tr>
+                            <th>{{this._id}}</th>
+                            <th>{{this.fullname}}</th>
+                            <th>{{this.class}}</th>
+                            <th>{{this.mail}}</th>
+                            <th>{{this.address}}</th>
+                            <th>{{this.phone}}</th>
+                            <th>{{this.dateofbirth}}</th>
+                            <th>{{this.idcard}}</th>
+                            <th>{{this.gender}}</th>
+                            <th>{{this.object}}</th>
+                            <th>
+                              <a href="/reader/{{this._id}}/edit" class="btn btn-link">Sửa</a>
+                              <a href="" data-id="{{this._id}}" class="btn btn-link" data-toggle="modal" data-target="#delete-reader-modal">Xóa</a>
+                            </th>
+                          </tr>
+
+                        {{/each}}
+                      </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- MODAL --}}
+
+        <div id="delete-reader-modal" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Xóa độc giả</h5>
+                <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Bạn có chắc muốn xóa thông tin ?</p>
+              </div>
+              <div class="modal-footer row">
+                <button id="btn-delete-reader" type="button" class="btn btn-primary col">Xóa</button>
+                <button type="button" class="btn btn-secondary col" data-dismiss="modal">Hủy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {{!-- DELETE HIDDEN FORM --}}
+    <form name="delete-reader-form" method="post"></form>
+    </main>
+
+    
+
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+          var readerID;
+          var deleteForm = document.forms['delete-reader-form'];
+
+          $('#delete-reader-modal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) 
+          readerID = button.data('id'); 
+          });
+          console.log(readerID)
+          var btnDeleteReader = document.getElementById('btn-delete-reader');
+          
+          btnDeleteReader.onclick = function () {
+            deleteForm.action = '/reader/' + readerID + '?_method=DELETE';
+            deleteForm.submit();
+          }
+
+      });
+
+      
+    </script>
+
+
+    <script>
+      var btnLogout = document.getElementById('btn-logout');
+
+      btnLogout.onclick = function () {
+        document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+      }
+    </script>

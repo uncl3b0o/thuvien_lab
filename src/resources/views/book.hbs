@@ -1,0 +1,159 @@
+<!-- Sidebar -->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+          <div>
+            <p class="app-sidebar__user-name"><b>Username</b></p>
+          </div>
+      </div>
+      <hr>
+      <ul class="app-menu">
+      <li><a class="app-menu__item haha" href="/">
+          <span class="app-menu__label">Trang chủ</span></a></li>
+
+      <li><a class="app-menu__item " href="/reader">
+          <span class="app-menu__label">Quản lý độc giả</span></a></li>
+
+      <li><a class="app-menu__item active" href="/book">
+        <span class="app-menu__label">Quản lý sách</span></a></li>
+
+      <li><a class="app-menu__item" href="/callcard">
+        <span class="app-menu__label">Quản lý phiếu mượn trả</span></a>
+      </li>
+
+      <li><a class="app-menu__item" href="/statistic">
+        <span class="app-menu__label">Báo cáo thống kê</span></a></li>
+
+      <li><a class="app-menu__item" href="">
+        <span class="app-menu__label" id="btn-logout">Đăng xuất </span></a></li>
+    </ul>
+    </aside>
+    Danh sách độc giả
+    <main class="app-content">
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb side">
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách sách</b></a></li>
+            </ul>
+            <div id="clock"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-body">
+                        <div class="row element-button">
+                            <div class="col-sm-2">
+                              <a class="btn btn-add btn-sm" href="/book/createdbook" title="Thêm"><i class="fas fa-plus"></i>
+                                Tạo phiếu nhập sách mới</a>
+                            </div>
+
+                            <div class="col-sm-2">
+                              <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="">
+                                  <i class="fas fa-print"></i> In phiếu nhập sách</a>
+                            </div>
+
+                            <div class="col-sm-2">
+                              <a class="btn btn-excel btn-sm" href="" title="In">
+                                  <i class="fas fa-file-excel"></i> Xuất Excel</a>
+                            </div>
+                          </div>
+                          <!-- Tìm kiếm -->
+                          <p class="timkiem"><b>TÌM KIẾM SÁCH</b></p>
+                            <form method="get" action="/book/search">
+                              <input name="q" type="text" id="seach-btn" onclick="" placeholder="Nhập tên sách cần tìm...">
+                              <button class="btn" type="submit">Tìm kiếm</button>
+                            </form>
+                            <hr>                     
+
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">STT</th>
+                                    <th scope="col">Mã số</th>
+                                    <th scope="col">Mã tài liệu</th>
+                                    <th scope="col">Nhan đề</th>
+                                    <th scope="col">Tác giả</th>
+                                    <th scope="col">Thể loại</th>
+                                    <th scope="col">Miêu tả</th>
+                                    <th scope="col">NXB</th>
+                                    <th scope="col">Giá tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        {{#each books}}
+
+                          <tr>
+                            <th scope="row">{{sum @index 1}}</th>
+                            <th>{{this.idbook}}</th>
+                            <th>{{this._id}}</th>
+                            <th>{{this.topic}}</th>
+                            <th>{{this.author}}</th>
+                            <th>{{this.type}}</th>
+                            <th>{{this.description}}</th>
+                            <th>{{this.nxb}}</th>
+                            <th>{{this.cost}}</th>
+                            <th>
+                              <a href="/book/{{this._id}}/edit" class="btn btn-link">Sửa</a>
+                              <a href="" data-id="{{this._id}}" class="btn btn-link" data-toggle="modal" data-target="#delete-book-modal">Xóa</a>
+                            </th>
+                          </tr>
+
+                        {{/each}}
+                      </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- MODAL --}}
+
+        <div id="delete-book-modal" class="modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Xóa sách</h5>
+                <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Bạn có chắc muốn xóa thông tin ?</p>
+              </div>
+              <div class="modal-footer row">
+                <button id="btn-delete-book" type="button" class="btn btn-primary col">Xóa</button>
+                <button type="button" class="btn btn-secondary col" data-dismiss="modal">Hủy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form name="delete-book-form" method="post"></form>
+    </main>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          var bookID;
+          var deleteForm = document.forms['delete-book-form'];
+
+          $('#delete-book-modal').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) 
+          bookID = button.data('id'); 
+          });
+          console.log(bookID)
+          var btnDeleteBook = document.getElementById('btn-delete-book');
+          
+          btnDeleteBook.onclick = function () {
+            deleteForm.action = '/book/' + bookID + '?_method=DELETE';
+            deleteForm.submit();
+          }
+
+      });
+    </script>
+
+    <script>
+      var btnLogout = document.getElementById('btn-logout');
+
+      btnLogout.onclick = function () {
+        document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+      }
+    </script>

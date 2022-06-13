@@ -1,0 +1,93 @@
+<!-- Sidebar -->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div>
+          <p class="app-sidebar__user-name"><b>Username</b></p>
+        </div>
+      <hr>
+      <ul class="app-menu">
+      <li><a class="app-menu__item haha" href="/">
+          <span class="app-menu__label" for=""name="" id="" >Trang chủ</span></a></li>
+
+      <li><a class="app-menu__item" href="/reader">
+          <span class="app-menu__label" for="">Quản lý độc giả</span></a></li>
+
+      <li><a class="app-menu__item" href="/book">
+        <span class="app-menu__label" for="">Quản lý sách</span></a></li>
+
+      <li><a class="app-menu__item active" href="/callcard">
+        <span class="app-menu__label" for="">Quản lý phiếu mượn trả</span></a>
+      </li>
+
+      <li><a class="app-menu__item" href="/statistic">
+        <span class="app-menu__label" for="">Báo cáo thống kê</span></a></li>
+
+      <li><a class="app-menu__item" href="">
+        <span class="app-menu__label" id="btn-logout">Đăng xuất</span></a></li>
+    </ul>
+    </aside>
+    <main class="app-content">
+        <div class="app-title">
+          <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">Danh sách phiếu trả</li>
+            <li class="breadcrumb-item"><a href="#">Tạo phiếu trả sách mới</a></li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+    
+            <div class="tile">
+              <h3 class="tile-title">Tạo phiếu trả sách mới</h3>
+              <div class="tile-body">
+                <form class="row" method="post" action="/callcard/createdcallcard/created">
+                  <div class="form-group col-md-4">
+                    <label class="control-label" for="readerid">Mã độc giả</label>
+                    <select class="form-control" name="readerid" id="readerid">
+                      <option>-- Chọn mã độc giả --</option>
+                      {{#each readers}}
+                      <option>{{this._id}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="control-label" for="fullname">Họ tên</label>
+                    <input name="fullname" id="fullname" class="form-control" type="text" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="control-label" for="bookdetails">Mã tài liệu</label>
+                    <input name="bookdetails" id="bookdetails" class="form-control" type="text" required>
+                  </div>
+                  {{!-- <div class="form-group col-md-4">
+                    <label class="control-label" for="topic">Nhan đề</label>
+                    <input name="topic" id="topic" class="form-control" type="text" required>
+                  </div> --}}
+                  <div class="form-group  col-md-4">
+                    <label class="control-label" for="expirationdate">Hạn trả</label>
+                    <input name="expirationdate" id="expirationdate" class="form-control" type="date" required>
+                  </div>
+                  <div class="form-group  col-md-4">
+                    <label class="control-label" for="returndate">Ngày trả</label>
+                    <input name="returndate" id="returndate" class="form-control" type="date" required>
+                  </div>
+                  <div class="form-group  col-md-4">
+                    <label class="control-label" for="deposit">Tiền cọc</label>
+                    <input name="deposit" id="deposit" class="form-control" type="number" required>
+                  </div>
+                  </div>
+                  <button class="btn btn-save" type="submit">Lưu lại</button>
+                </form>
+              </div>
+              <a class="btn btn-cancel" href="/callcard">Hủy bỏ</a>
+              <a class="btn btn-delete print-file" type="button" title="In" onclick=""><b>In phiếu trả</b></a>
+            </div>
+    
+      </main>
+
+
+      <script>
+      var btnLogout = document.getElementById('btn-logout');
+
+      btnLogout.onclick = function () {
+        document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+      }
+    </script>

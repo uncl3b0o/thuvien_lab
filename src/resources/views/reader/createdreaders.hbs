@@ -1,0 +1,99 @@
+<!-- Sidebar -->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside class="app-sidebar">
+        <div>
+          <p class="app-sidebar__user-name"><b>Username</b></p>
+        </div>
+      </div>
+      <hr>
+      <ul class="app-menu">
+      <li><a class="app-menu__item haha" href="/">
+          <span class="app-menu__label">Trang chủ</span></a></li>
+
+      <li><a class="app-menu__item active" href="/reader">
+          <span class="app-menu__label">Quản lý độc giả</span></a></li>
+
+      <li><a class="app-menu__item" href="/book">
+        <span class="app-menu__label">Quản lý sách</span></a></li>
+
+      <li><a class="app-menu__item" href="/callcard">
+        <span class="app-menu__label">Quản lý phiếu mượn trả</span></a>
+      </li>
+
+      <li><a class="app-menu__item" href="/statistic">
+        <span class="app-menu__label">Báo cáo thống kê</span></a></li>
+
+      <li><a class="app-menu__item" href="">
+        <span class="app-menu__label">Đăng xuất </span></a></li>
+    </ul>
+    </aside>
+    <main class="app-content">
+        <div class="app-title">
+          <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item">Danh sách độc giả</li>
+            <li class="breadcrumb-item"><a href="#">Thêm độc giả mới</a></li>
+          </ul>
+        </div>
+        <a class="btn btn-cancel" href="/reader">Quay lại</a>
+        <div class="row">
+          <div class="col-md-12">
+    
+            <div class="tile">
+    
+              <h3 class="tile-title">Tạo mới độc giả</h3>
+              <div class="tile-body">
+                <form class="row" method="post" action="/reader/createdreaders/created">
+                  <div class="form-group col-md-4">
+                    <label class="control-label" for="fullname">Họ và tên</label>
+                    <input class="form-control" id="fullname" name="fullname" type="text" required>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label class="control-label" for="class">Lớp</label>
+                    <input class="form-control" id="class" name="class" type="text" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="control-label" for="mail">Email</label>
+                    <input class="form-control" id="mail" name="mail" type="text" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label class="control-label" for="address">Địa chỉ thường trú</label>
+                    <input class="form-control" id="address" name="address" type="text" required>
+                  </div>
+                  <div class="form-group  col-md-3">
+                    <label class="control-label" for="phone">Số điện thoại</label>
+                    <input class="form-control" id="phone" name="phone" type="number" required>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label class="control-label" for="dateofbirth">Ngày sinh</label>
+                    <input class="form-control" id="dateofbirth" name="dateofbirth" type="date">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label class="control-label" for="idcard">Số CMND</label>
+                    <input class="form-control" id="idcard" name="idcard" type="number" required>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label class="control-label" for="gender">Giới tính</label>
+                    <select class="form-control" id="gender" name="gender" required>
+                      <option>-- Chọn giới tính --</option>
+                      <option>Nam</option>
+                      <option>Nữ</option>
+                    </select>
+                  </div>
+    
+                  <div class="form-group col-md-3">
+                    <label for="object" class="control-label">Đối tượng</label>
+                    <select class="form-control" id="object" name="object">
+                      <option>-- Chọn đối tượng --</option>
+                      <option>Sinh viên</option>
+                      <option>Giảng viên</option>
+                      <option>CB-NV</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-save" style="width: 20%;">Lưu lại</button>
+                </form>
+              </div>
+              
+            </div>
+    
+      </main>
